@@ -8,6 +8,14 @@ import { Form, useFetcher } from "react-router-dom"
 import { CurrencyDollarIcon } from "@heroicons/react/24/outline"
 
 const AddBudgetForm = () => {
+    // write to table budgets
+    // function handleSubmit(event) {
+    //     event.preventDefault();
+    //     axios.post("http://localhost:8081/budgets", {name, amount})
+    //     .then(res => console.log(res))
+    //     .catch(err => console.log(err));
+    // }
+
     const fetcher = useFetcher();
     const isSubmitting = fetcher.state === "submitting"
 
@@ -33,6 +41,7 @@ const AddBudgetForm = () => {
             method="post"
             className="grid-sm"
             ref={formRef}
+            // onSubmit={handleSubmit}
         >
             <div className="grid-xs">
                 <label htmlFor="newBudget">Budget Name</label>
@@ -43,6 +52,7 @@ const AddBudgetForm = () => {
                 placeholder="e.g. Housing"
                 required
                 ref={focusRef}
+                onChange={e => setBudgetName(e.target.value)}
                 />
             </div>
             <div className="grid-xs">
@@ -54,6 +64,7 @@ const AddBudgetForm = () => {
                 placeholder="e.g. R 720"
                 required
                 inputMode="decimal"
+                onChange={e => setBudgetAmount(e.target.value)}
                 />
             </div>
             <input type="hidden" name="_action" value="createBudget"/>

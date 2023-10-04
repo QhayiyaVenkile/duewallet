@@ -26,6 +26,7 @@ const db = mysql.createConnection({
     database: 'duewallet'
 })
 
+// insert into table users
 app.post('/users', async (req, res) => {
     const { userName, email, password } = req.body;
     
@@ -43,7 +44,47 @@ app.post('/users', async (req, res) => {
     catch (error) {
         console.error("Error during user registration:", error.message);
         res.status(500).json({ success: false, message: "Error during user registration" });
-      }
+    }
+})
+
+// insert into table budgets
+app.post('/budgets', async (req, res) => {
+    const { name, amount } = req.body;
+    
+    try {
+        const budgetId = crypto.randomUUID();
+
+        const result = await db.query(
+            'INSERT INTO budgets (BudgetID, BudgetName, Allocated, CreatedAt) VALUES (?, ?, ?, NOW())',
+            [budgetId, name, amount]
+        );
+    
+        res.json({ success: true, message: "Budget created successfully" });
+        }
+    catch (error) {
+        console.error("Error during budget creation:", error.message);
+        res.status(500).json({ success: false, message: "Error during budget creation" });
+    }
+})
+
+// insert into table expenses
+app.post('/expenses', async (req, res) => {
+    const { name, amount, budgetId } = req.body;
+    
+    try {
+        const expenseId = crypto.randomUUID();
+
+        const result = await db.query(
+            'INSERT INTO expenses (ExpenseID, ExpenseName, Amount, CreatedAt, BudgetID) VALUES (?, ?, ?, NOW(), ?)',
+            [expenseId, name, amount, budgetId]
+        );
+    
+        res.json({ success: true, message: "Expense created successfully" });
+        }
+    catch (error) {
+        console.error("Error during expense creation:", error.message);
+        res.status(500).json({ success: false, message: "Error during expense creation" });
+    }
 })
 
 // create localhost

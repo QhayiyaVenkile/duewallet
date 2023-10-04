@@ -8,6 +8,14 @@ import { useFetcher } from "react-router-dom"
 import { PlusCircleIcon } from "@heroicons/react/24/outline"
 
 const AddExpenseForm = ({budgets}) => {
+    // write to table expenses
+    // function handleSubmit(event) {
+    //     event.preventDefault();
+    //     axios.post("http://localhost:8081/expenses", {name, amount, budgetId})
+    //     .then(res => console.log(res))
+    //     .catch(err => console.log(err));
+    // }
+
     const fetcher = useFetcher()
     const isSubmitting = fetcher.state === "submitting";
     const formRef = useRef()
@@ -24,6 +32,7 @@ const AddExpenseForm = ({budgets}) => {
 
     const [selectedOption, setSelectedOption] = useState('');
 
+// create expense
   return (
     <div className="form-wrapper">
         <h2 className="h3">Add New{" "}<span className="accent">
@@ -45,6 +54,7 @@ const AddExpenseForm = ({budgets}) => {
                         placeholder="e.g. Vegetables"
                         ref={focusRef}
                         required
+                        onChange={e => setExpenseName(e.target.value)}
                         />
                     </div>
                     <div className="grid-xs">
@@ -57,6 +67,7 @@ const AddExpenseForm = ({budgets}) => {
                         id="newExpenseAmount"
                         placeholder="e.g. R 23.99"
                         required
+                        onChange={e => setExpenseAmount(e.target.value)}
                         />
                     </div>
                 </div>

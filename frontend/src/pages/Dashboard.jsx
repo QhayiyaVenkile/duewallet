@@ -14,9 +14,6 @@ import Table from "../components/Table";
 // library imports
 import { toast } from "react-toastify";
 
-// 
-
-
 //loader
 export function dashboardLoader(){
     const users = fetchData("users");
@@ -34,12 +31,12 @@ export async function dashboardAction({ request }){
     if (_action === "newUser") {
         // new user submission
         try {
-          newUser({
-          userName: values.userName,
-          email: values.newEmail,
-          password: values.newPassword,
-          });
-          return toast.success(`Welcome, ${values.userName}`)
+            newUser({
+            userName: values.userName,
+            email: values.newEmail,
+            password: values.newPassword,
+            });
+            return toast.success(`Welcome, ${values.userName}`)
         }
         catch (e) {
             throw new Error("There was a problem creating your account.")

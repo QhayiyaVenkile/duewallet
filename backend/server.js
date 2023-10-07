@@ -38,7 +38,7 @@ db.connect((err) => {
         // query to create table users
         let query = `CREATE TABLE ${tableName} 
         (
-            "UserID" VARCHAR(36) PRIMARY KEY,
+            "UserID" VARCHAR(36) PRIMARY KEY NOT NULL,
             "UserName" VARCHAR(64) NOT NULL,
             "Email" VARCHAR(254) NOT NULL,
             "Password" VARCHAR(255) NOT NULL,
@@ -59,7 +59,7 @@ db.connect((err) => {
         // query to create table budgets
         let query1 = `CREATE TABLE ${tableName1} 
         (
-            "BudgetID" VARCHAR(36) PRIMARY KEY,
+            "BudgetID" VARCHAR(36) PRIMARY KEY NOT NULL,
             "BudgetName" VARCHAR(64) NOT NULL,
             "Allocated" DECIMAL(15, 2) NOT NULL,
             "CreatedAt" DATE NOT NULL
@@ -79,7 +79,7 @@ db.connect((err) => {
         // query to create table expenses
         let query2 = `CREATE TABLE ${tableName2} 
         (
-            "ExpenseID" VARCHAR(36) PRIMARY KEY,
+            "ExpenseID" VARCHAR(36) PRIMARY KEY NOT NULL,
             "ExpenseName" VARCHAR(64) NOT NULL,
             "Amount" DECIMAL(15, 2) NOT NULL,
             "CreatedAt" DATE NOT NULL,
